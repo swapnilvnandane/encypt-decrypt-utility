@@ -1,0 +1,25 @@
+{
+  "name": "encypt-decrypt-utility",
+  "version": "1.0.0",
+  "description": "Utility to encryption/decryption tool for Node.js + TypeScript",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts"
+  },
+  "keywords": [
+    "nodejs",
+    "encryption",
+    "cli"
+  ],
+  "author": "Swapnil Nandane",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}
