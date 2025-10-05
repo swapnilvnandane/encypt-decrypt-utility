@@ -18,7 +18,12 @@ A simple CLI utility for encrypting and decrypting messages using AES-256-GCM in
 
 ### Installation
 
-Clone the repository and install dependencies:
+Clone the repository:
+
+```sh
+https://github.com/swapnilvnandane/encypt-decrypt-utility.git
+```
+Install dependencies:
 
 ```sh
 npm install
