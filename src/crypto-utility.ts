@@ -12,7 +12,7 @@ const KEY = crypto
 /**
  * Encrypts a string using AES-256-GCM.
  * @param text - The plaintext string to encrypt.
- * @returns The encrypted string in the format ENC(ivHexZencryptedHexZauthTagHex).
+ * @returns The encrypted string in the format ENC(ivbase64Zencryptedbase64ZauthTagbase64).
  */
 export const encrypt = (text: string): string => {
     const iv = crypto.randomBytes(IV_LENGTH);
@@ -20,20 +20,20 @@ export const encrypt = (text: string): string => {
     let encrypted = cipher.update(text, "utf8");
     encrypted = Buffer.concat([encrypted, cipher.final()]);
     const authTag = cipher.getAuthTag();
-    return `ENC(${iv.toString("hex")}Z${encrypted.toString("hex")}Z${authTag.toString("hex")})`;
+    return `ENC(${iv.toString("base64")}Z${encrypted.toString("base64")}Z${authTag.toString("base64")})`;
 };
 
 /**
  * Decrypts a string encrypted by the encrypt function.
- * @param text - The encrypted string in the format ENC(ivHexZencryptedHexZauthTagHex).
+ * @param text - The encrypted string in the format ENC(ivbase64Zencryptedbase64ZauthTagbase64).
  * @returns The decrypted plaintext string.
  */
 export function decrypt(text: string): string {
     const encText = text.replace(/^ENC\(/, "").replace(/\)$/, "");
-    const [ivHex, encryptedData, authTag] = encText.split("Z");
-    const iv = Buffer.from(ivHex, "hex");
-    const encrypted = Buffer.from(encryptedData, "hex");
-    const at = Buffer.from(authTag, "hex");
+    const [ivBase64, encryptedData, authTag] = encText.split("Z");
+    const iv = Buffer.from(ivBase64, "base64");
+    const encrypted = Buffer.from(encryptedData, "base64");
+    const at = Buffer.from(authTag, "base64");
     const decipher = crypto.createDecipheriv(ALGORITHM, Buffer.from(KEY), iv);
     decipher.setAuthTag(at);
     let decrypted = decipher.update(encrypted);

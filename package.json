@@ -13,7 +13,6 @@
     "cli"
   ],
   "author": "Swapnil Nandane",
-  "license": "MIT",
   "devDependencies": {
     "@types/node": "^24.6.2",
     "ts-node": "^10.9.2",
